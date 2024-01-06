@@ -1,0 +1,94 @@
+Technology used:
+
+ -PHP,HTML5,CSS3,JavaScript,Bootstrap5
+ -MySQL
+
+=================================================================================================
+
+Folder: Connection
+
+- In the file "connect.php" is a simple php file which contains the database connection for the MySQL lake_xplorer database
+ 
+
+=================================================================================================
+
+Folder: Home
+
+- Two of the folder such as "css" and "js" contains files about Bootstrap 5 so you don't need to use 
+  CDN just because you are connecting to the internet
+
+- In the "css_home" folder we have the "style.css" for the "home.php" mostly contains design for sidebar as well of navbar design both color and effects
+
+- In "homr.php" file is the main page where the user is directed so it can just between watching lake sighting, register an account in case it doesn't have one, or choose to login so it can directed to another page
+
+- the "<?php include('../Connection/connect.php')?>" is the first think to do in order for the page to be connected with the database (not that it do to much work but still better to be safe)
+
+- the 
+"<?php 
+
+   $api_url = "https://api.quotable.io/random";
+   $quote = json_decode(file_get_contents($api_url));
+  
+
+?>" is the API connection with the Fun Fact API so that we can take the quotes and use them for the lake sighting as if the quote of the day
+
+
+- The inner style is a bit tricky one:
+ 
+    1) .container -> its the main div where is place the table which contains the lake images so that the users can see lakes and look for more details on it
+
+    2) .viewbtn ->  in the style design is used just as a cursor: pointer so that users can see what are they are trying to click on it (keep in mind that the viewbtn is stored in the image of a table row)
+
+    3) #example -> everything that contains "#example tr td" basically it hides other rows of the table(you must understand that there are more in table but they are hidden just so we can use the other hidden rows to manipulate on our own advantage without letting users know)
+
+- In the Sidebar menu (there are comments on every file just so you can know what to change such as "<!-- Sidebar -->") we take a look on the link ref such as "Post Image" how many role for know is that for those users how are not login will pop up a Bootstrat Modal which says that the user must login in order to post any image that he/she want
+
+- In the dropdown div we basically have to links such as "Login" and "Register".Now the "Register" link is connected with the "registration.php" so that the user can register to our page and the "Login" is connected with the "login.php" just so the user can login and directed to the "Login_Home/login_home.php" 
+
+- In the container div we get to see the main table where are the lakes and other rows are stored now keep in mind that the table id is "example" which is important in case you want change something and below we can see that it contains a php command (I didn't involve AJAX cuz I thout it will run faster).
+
+- On of the table row for its stored images of the lake contain a class name "viewbtn" which is important to open another Bootstrat Modal call "imagesModal" that contain image detail.In order to open the specific image we have created a script that tells the user that the moment he/she click on the image it will pop up a modal that shows details only for that specific lake and all the table rows value are transfer to input type text in "imagesModal"
+
+- The "Login Modal" is a simple login form where user has to put it credential and is connected with the "login.php" file so it will compare if the credential are the same when he/she was register in the first place (most of the color that is used in this page are inner style with the color: #342D7E)
+
+- The "Registration Modal" is the same as the login modal just don't forget that is connected with the file "registration.php"
+
+- "Images View Modal" or "imagesModal" is a bit tricky, with the first think such as the close button which is a command in javascript which says that the moment the user close the modal the page is going to be refresh now why is that is in order for the user to receive random quote for every image.Next on is the input type="hidden" which they all have table row from the script that is on the "Main" which means every time you click an image all the value that is for that image(id, image, email etc) they will all be place on these input type="hidden".Down belowe they are header and paragraph which the main role of them is that they will take values of the hidden input once the button "Show more" will be click 
+
+- "<?php echo $quote->content ?>" is basicly where random quotes show 
+
+- The script "myFunction" is basicly take all the values of the input type="hidden" and transfer them to the header and paragraph
+
+==================================================================================================
+
+Folder: Login_Home
+
+Before we begin exploring the Login_Home folder which include "login_home.php" you must understand that everything in the code is the same as the "home.php" in the folder Home the only different now is that the user has successfully login on the page and now he can experiment a bit
+
+- In the inner style we can see that nothing has change and that the only think that has added is the like button for it size and the cursor pointer on it
+
+- In the Post Image link we now see that it has a Bootstrap Modal of its own called "postModal" which it direct the user to a modal in which he/she can post image as well any description or details for the lake
+
+- In the previous file such as "home.php" we saw the word Account down below of the sidebar but now by receiving the user's email from the URL (using HTTP POST) we now can use it in order to tell the user on which account is
+
+- The link My images it basicly open another Bootstrap Modal on which the user can see the lakes picture that he/she has posted and it only gives the option to delete it and the other link Log out well it only return the user back to the main page where he/she was not login
+
+- The table below is the same as the "home.php" so nothing to worry on it (don't forget that the lake image as the view button which shows the modal of lake details)
+
+- Now we reach the Post Modal which basicly shows on how the user will select a .jpeg or a .png file as well given its credential (don't forget the color: #342D7E) an the php code below it shows that once you take the email from the URL you are going to use it in order for the image to know on which user it belongs so that it can later to be delete by the original user
+
+- The Images Modal its the same as the one in "home.php" just it now contains the like button so that the login user are allowed to like or dislike the image and the script Toggle() it shows the button that when it is click it will turn from grey to blue and the other way around
+
+- "post_image.php" its connected with the Post Modal which tells that when the user is about to put the image lake and the description of it it will be stored in database
+
+- "lake_delete.php" its connected with the My Images Modal which tells that when the user is going to click the delete button it will delete only based on the user email(that's why the user email its on the URL so we can manipulate it on the user advantage)
+
+================================================================================================
+
+IMPORTANT NOTES:
+
+login.php, registration.php, post_image.php, lake_delete.php they all have a common that they are build using MySQL Procedure so that way in the database you will know where to start
+
+
+
+
